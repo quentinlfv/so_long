@@ -6,22 +6,39 @@ int	main(int av, char **ac)
 	int	fd;
 	t_game game;
 
-	map = NULL;
 	fd = open(ac[1], O_RDONLY);
 	if (!fd)
 		return (0);
-	game.map = get_map(fd, &game.map);
+	init_struct(&game);
+	game.map = get_map(fd, &game.size);
 	close(fd);
-	print_map(map);
-	free_tab(map);
+	print_map(game.map);
+	if (!check_map(&game))
+		return (free_tab(game.map), 0);
+	free_tab(game.map);
 	return (0);
 }
 
-char **get_map(int fd, char **map, t_size_map *size_map)
+void	init_struct(t_game *game)
 {
-	char	*line;
-	int	size;
+	game->player.x = 0;
+	game->player.y = 0;
+	game->player.status = 0;
+	game->size.line = 0;
+	game->size.column = 0;
+	game->nbr_item = 0;
+	game->exit_status = 0;
+	game->map = NULL;
+}
 
+
+char **get_map(int fd, t_size_map *size_map)
+{
+	char	**map;
+	char	*line;
+	int		size;
+
+	map = NULL;
 	size = 0;
 	line = get_next_line(fd);
 	map = add_new_line(map, line, &size);
@@ -54,7 +71,7 @@ char	**add_new_line(char **map, char *line, int *size)
 	new_map[i] = malloc(sizeof(char) * (ft_strlen(line)));
 	if (!new_map[i])
 		return (NULL);
-	ft_strlcpy(new_map[i], line, (ft_strlen(line) - 1));
+	ft_strlcpy(new_map[i], line, ft_strlen(line));
 	new_map[i + 1] = NULL;
 	free(map);
 	(*size)++;
