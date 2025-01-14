@@ -46,8 +46,12 @@ int	check_wall(char pos, int x, int y, t_size_map size);
 int	check_exit(int	*exit_status);
 int	check_player(int x, int y, t_player *player);
 
+/*------------- floodfill.c ---------------*/
 
-
+void	helper(char **map, int x, int y, char prev_val);
+int	floodFill(char **map, int x, int y, t_size_map *size_map);
+char	**copy_map(char **prev_map, t_size_map *size_map);
+int		check_floodFill(char **map);
 
 
 

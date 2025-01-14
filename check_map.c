@@ -17,7 +17,6 @@ int	check_map(t_game *game)
 		}
 		i++;
 	}
-	printf("it work!\n nbr_item = %d\n", game->nbr_item);
 	return (1);
 }
 
@@ -28,7 +27,6 @@ int	check_pos(char pos, int	x, int y, t_game **game)
 	if (pos == 'E')
 		if (!check_exit(&(*game)->exit_status))
 			return (0);
-	printf("pos = %c\n", pos);
 	if (pos == 'P')
 		if (!check_player(x, y, &(*game)->player))
 			return (0);
@@ -41,7 +39,6 @@ int	check_pos(char pos, int	x, int y, t_game **game)
 
 int	check_wall(char pos, int x, int y, t_size_map size)
 {
-	printf("x = %d | y = %d\n", x, y);
 	if ((y == 0 || y == size.line) && pos != '1')
 		return (0);
 	if ((x == 0 || x == size.column) && pos != '1')
@@ -51,7 +48,6 @@ int	check_wall(char pos, int x, int y, t_size_map size)
 
 int	check_exit(int *exit_status)
 {
-	printf("exit = %d\n", *exit_status);
 	if (*exit_status != 0)
 		return (0);
 	*exit_status = 1;
