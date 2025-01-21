@@ -6,7 +6,6 @@ char	**copy_map(char **prev_map, t_size_map *size)
 	int	i;
 
 	i = 0;
-	printf("line = %d | column = %d\n", size->line, size->column);
 	new_map = malloc(sizeof(char *) * (size->line + 1));
 	if (!new_map)
 		return (NULL);
@@ -57,7 +56,7 @@ int		check_floodFill(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == 'C')
+			if (map[i][j] == 'C' | map[i][j] == 'E')
 				return (0);
 			j++;
 		}

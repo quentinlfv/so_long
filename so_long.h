@@ -6,6 +6,14 @@
 # include <stdlib.h>
 
 
+typedef struct s_data
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	//void	textures[5];
+	char	**map_addr;
+}t_data;
+
 typedef struct s_player
 {
 	int	x;
@@ -45,6 +53,7 @@ int	check_pos(char pos, int	x, int y, t_game **game);
 int	check_wall(char pos, int x, int y, t_size_map size);
 int	check_exit(int	*exit_status);
 int	check_player(int x, int y, t_player *player);
+int	check_if_rectangle(int len_line, int nu_column);
 
 /*------------- floodfill.c ---------------*/
 
@@ -53,14 +62,12 @@ int	floodFill(char **map, int x, int y, t_size_map *size_map);
 char	**copy_map(char **prev_map, t_size_map *size_map);
 int		check_floodFill(char **map);
 
+/*-------------- start_game.c --------------*/
 
-
-
-
-
-
-
-
+void	start_game(char **map);
+int	on_keypress(int	keysym, t_data *data);
+int		on_destroy(t_data *data);
+int	send_to_window(t_data *data);
 
 
 #endif

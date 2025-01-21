@@ -15,6 +15,7 @@ int	main(int av, char **ac)
 	if (!check_map(&game) || !floodFill(game.map, game.player.x, game.player.y, &game.size))
 		return (free_tab(game.map), 0);
 	print_map(game.map);
+	start_game(game.map);
 	free_tab(game.map);
 	return (0);
 }

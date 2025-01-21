@@ -15,6 +15,8 @@ int	check_map(t_game *game)
 				return (0);
 			j++;
 		}
+		if (!check_if_rectangle(j, (game->size.column - 1)))
+			return (printf("j = %d | column = %d\n", j, game->size.column - 1), 0);
 		i++;
 	}
 	return (1);
@@ -64,4 +66,9 @@ int	check_player(int x, int y, t_player *player)
 	return (1);
 }
 
-
+int	check_if_rectangle(int len_line, int nu_column)
+{
+	if (len_line != nu_column)
+		return (0);
+	return (1);
+}
