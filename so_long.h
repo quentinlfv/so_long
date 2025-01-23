@@ -5,12 +5,13 @@
 # include <stddef.h>
 # include <stdlib.h>
 
+# define SIZE 128
 
 typedef struct s_data
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	//void	textures[5];
+	void	*textures[5];
 	char	**map_addr;
 }t_data;
 
@@ -34,6 +35,7 @@ typedef struct s_game
 	char		**map;
 	int			nbr_item;
 	int			exit_status;
+	t_data		*data_addr;
 }t_game;
 
 /*------------- main.c -------------------------*/
@@ -64,10 +66,11 @@ int		check_floodFill(char **map);
 
 /*-------------- start_game.c --------------*/
 
-void	start_game(char **map);
-int	on_keypress(int	keysym, t_data *data);
+void	start_game(t_game *game);
+int	on_keypress(int	keysym, t_game *game);
 int		on_destroy(t_data *data);
-int	send_to_window(t_data *data);
-
+int	assign_assets_to_img(t_data *data);
+void	put_map_to_window(t_data *data);
+void	move_rigth(t_data *data, char **map, t_player *player);
 
 #endif
