@@ -6,14 +6,11 @@
 # include <stdlib.h>
 
 # define SIZE 128
+# define RIGTH 65363
+# define LEFT 65361
+# define UP 65362
+# define DOWN 65364
 
-typedef struct s_data
-{
-	void	*mlx_ptr;
-	void	*win_ptr;
-	void	*textures[5];
-	char	**map_addr;
-}t_data;
 
 typedef struct s_player
 {
@@ -35,8 +32,16 @@ typedef struct s_game
 	char		**map;
 	int			nbr_item;
 	int			exit_status;
-	t_data		*data_addr;
 }t_game;
+
+typedef struct s_data
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	void	*textures[5];
+	char	**map_addr;
+	t_game	*game_addr;
+}t_data;
 
 /*------------- main.c -------------------------*/
 
@@ -67,10 +72,19 @@ int		check_floodFill(char **map);
 /*-------------- start_game.c --------------*/
 
 void	start_game(t_game *game);
-int	on_keypress(int	keysym, t_game *game);
+void	put_img_to_window(t_data *data, void *asset, int x, int y);
+int	on_keypress(int	keysym, t_data *data);
 int		on_destroy(t_data *data);
 int	assign_assets_to_img(t_data *data);
 void	put_map_to_window(t_data *data);
 void	move_rigth(t_data *data, char **map, t_player *player);
+
+/*------------- move.c -------------------*/
+
+
+void	move_rigth(t_data *data, char **map, t_player *player);
+void	move_left(t_data *data, char **map, t_player *player);
+void	move_up(t_data *data, char **map, t_player *player);
+void	move_down(t_data *data, char **map, t_player *player);
 
 #endif

@@ -23,7 +23,7 @@ char	**copy_map(char **prev_map, t_size_map *size)
 
 void	helper(char **map, int x, int y, char prev_val)
 {
-	if (prev_val == map[y][x] || map[y][x] == '1')
+	if (prev_val == map[y][x] || map[y][x] == '1' )
 		return ;
 	map[y][x] = 'P';
 	helper(map, x, y + 1, map[y][x]); 
@@ -39,7 +39,7 @@ int	floodFill(char **map, int x, int y, t_size_map *size)
 	tmp_map = copy_map(map, size);
 	helper(tmp_map, x, y, '7');
 	if (!check_floodFill(tmp_map))
-		return (free_tab(tmp_map), printf("Error floodFill\n"), 0);
+		return (print_map(tmp_map), free_tab(tmp_map), printf("Error floodFill\n"), 0);
 	free_tab(tmp_map);
 	return (1);
 }
@@ -56,7 +56,7 @@ int		check_floodFill(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == 'C' | map[i][j] == 'E')
+			if (map[i][j] == 'C' || map[i][j] == 'E')
 				return (0);
 			j++;
 		}

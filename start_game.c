@@ -60,34 +60,33 @@ int		on_destroy(t_data *data)
 	return (0);
 }
 
-void	move_rigth(t_data *data, char **map, t_player *player)
+void	put_img_to_window(t_data *data, void *asset, int x, int y)
 {
-	char next_pos;
-
-	nex_pos = map[player->x + 1][player->y]
-	if (next_pos == '1')
-		return ;
-	if (next_pos == '0' | next_pos == 'C')
-	{
-		put_image_to_window(data, data->textures[2], (player->x * SIZE) + SIZE, player->y * SIZE);
-		if (next_pos == 'C')
-			{
-
-			}
-		put_image_to_window(data, data->textures[1], player->x * SIZE, player->y * SIZE)
-		player->x += 1;
-	}
-	
-	//if (game->map[game->player.y][game->player.x + 1] == 1)
-	//if (game->map[game->player.y][game->player.x + 1] == 1)
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, asset, y, x);
 }
 
-int	on_keypress(int	keysym, t_game *game)
+void	update_player_pos()
 {
-	(void)game->data_addr;
+
+}
+
+
+
+int	on_keypress(int	keysym, t_data *data)
+{
+	(void)data;
 	printf("Pressed key: %d\n", keysym);
-	if (keysym == 65363)
-		move_rigth(game->data_addr, game->map, &game->player);
+	if (keysym == RIGTH)
+	{
+		move_rigth(data, data->game_addr->map, &data->game_addr->player);
+		print_map(data->game_addr->map);
+	}
+	if (keysym == LEFT)
+		move_left(data, data->game_addr->map, &data->game_addr->player);
+	if (keysym == UP)
+		move_up(data, data->game_addr->map, &data->game_addr->player);
+	if (keysym == DOWN)
+		move_down(data, data->game_addr->map, &data->game_addr->player);
 	return (0);
 }
 
@@ -102,9 +101,9 @@ void	start_game(t_game *game)
 	data.win_ptr = mlx_new_window(data.mlx_ptr, 1920, 1080, "SO_LONG");
 	if (!data.win_ptr)
 		return (free(data.mlx_ptr));
-	game->data_addr = &data;
+	data.game_addr = game;
 	assign_assets_to_img(&data);
-	mlx_hook(data.win_ptr, KeyRelease, KeyReleaseMask, &on_keypress, game);
+	mlx_hook(data.win_ptr, KeyRelease, KeyReleaseMask, &on_keypress, &data);
 	mlx_hook(data.win_ptr, DestroyNotify, StructureNotifyMask, &on_destroy, &data);
 	mlx_loop(data.mlx_ptr);
 }

@@ -11,7 +11,7 @@ int	check_map(t_game *game)
 		j = 0;
 		while (game->map[i][j])
 		{
-			if (!check_pos(game->map[i][j], j, i, &game))
+			if (!check_pos(game->map[i][j], i, j, &game))
 				return (0);
 			j++;
 		}
@@ -25,7 +25,7 @@ int	check_map(t_game *game)
 int	check_pos(char pos, int	x, int y, t_game **game)
 {
 	if (!check_wall(pos, x, y, (*game)->size))
-		return (0);
+		return (printf("Wrong map\n"), 0);
 	if (pos == 'E')
 		if (!check_exit(&(*game)->exit_status))
 			return (0);
@@ -41,9 +41,9 @@ int	check_pos(char pos, int	x, int y, t_game **game)
 
 int	check_wall(char pos, int x, int y, t_size_map size)
 {
-	if ((y == 0 || y == size.line) && pos != '1')
+	if ((y == 0 || y == size.column) && pos != '1')
 		return (0);
-	if ((x == 0 || x == size.column) && pos != '1')
+	if ((x == 0 || x == size.line) && pos != '1')
 		return (0);
 	return (1);
 }

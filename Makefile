@@ -10,6 +10,7 @@ SRCS		= main.c \
 				floodfill.c \
 				check_map.c \
 				start_game.c \
+				move.c	\
 				ft_strcpy.c \
 				get_next_line.c \
 				get_next_line_utils.c \
