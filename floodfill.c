@@ -23,13 +23,14 @@ char	**copy_map(char **prev_map, t_size_map *size)
 
 void	helper(char **map, int x, int y, char prev_val)
 {
-	if (prev_val == map[y][x] || map[y][x] == '1' )
+	printf("x = %d | y = %d | %s | %c\n", x, y, map[1], map[1][2]);
+	if (prev_val == map[x][y] || map[x][y] == '1')
 		return ;
-	map[y][x] = 'P';
-	helper(map, x, y + 1, map[y][x]); 
-	helper(map, x + 1, y, map[y][x]); 
-	helper(map, x, y - 1, map[y][x]); 
-	helper(map, x - 1, y, map[y][x]);
+	map[x][y] = 'P';
+	helper(map, x, y + 1, map[x][y]); 
+	helper(map, x + 1, y, map[x][y]); 
+	helper(map, x, y - 1, map[x][y]); 
+	helper(map, x - 1, y, map[x][y]);
 }
 
 int	floodFill(char **map, int x, int y, t_size_map *size)
@@ -37,7 +38,7 @@ int	floodFill(char **map, int x, int y, t_size_map *size)
 	char	**tmp_map;
 
 	tmp_map = copy_map(map, size);
-	helper(tmp_map, x, y, '7');
+	helper(tmp_map, x, y, 'Z');
 	if (!check_floodFill(tmp_map))
 		return (print_map(tmp_map), free_tab(tmp_map), printf("Error floodFill\n"), 0);
 	free_tab(tmp_map);
