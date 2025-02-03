@@ -12,7 +12,7 @@ int	main(int av, char **ac)
 	init_struct(&game);
 	game.map = get_map(fd, &game.size);
 	close(fd);
-	if (!check_map(&game) || !floodFill(game.map, game.player.x, game.player.y, &game.size))
+	if (!check_map(&game) || !floodFill(game.map, game.player.x, game.player.y, &game.size, game.nbr_item))
 		return (free_tab(game.map), 0);
 	print_map(game.map);
 	start_game(&game);

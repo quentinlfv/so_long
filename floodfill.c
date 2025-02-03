@@ -21,27 +21,50 @@ char	**copy_map(char **prev_map, t_size_map *size)
 	return (new_map);
 }
 
-void	helper(char **map, int x, int y, char prev_val)
+void	helper_exit(char **map, int x, int y, char prev_val, int *status_exit)
 {
-	printf("x = %d | y = %d | %s | %c\n", x, y, map[1], map[1][2]);
-	if (prev_val == map[x][y] || map[x][y] == '1')
+	if (map[x][y] == '1' || map[x][y] == 'V')
 		return ;
-	map[x][y] = 'P';
-	helper(map, x, y + 1, map[x][y]); 
-	helper(map, x + 1, y, map[x][y]); 
-	helper(map, x, y - 1, map[x][y]); 
-	helper(map, x - 1, y, map[x][y]);
+	if (map[x][y] == 'E')
+		*status_exit = 1;
+	map[x][y] = 'V';
+	helper_exit(map, x, y + 1, map[x][y], status_exit); 
+	helper_exit(map, x + 1, y, map[x][y], status_exit); 
+	helper_exit(map, x, y - 1, map[x][y], status_exit); 
+	helper_exit(map, x - 1, y, map[x][y], status_exit);
 }
 
-int	floodFill(char **map, int x, int y, t_size_map *size)
+void	helper_collect(char **map, int x, int y, char prev_val, int *coins)
 {
-	char	**tmp_map;
+	if (map[x][y] == '1' || map[x][y] == 'V' || map[x][y] == 'E')
+		return ;
+	if (map[x][y] == 'C')
+		(*coins)++;
+	map[x][y] = 'V';
+	helper_collect(map, x, y + 1, map[x][y], coins); 
+	helper_collect(map, x + 1, y, map[x][y], coins); 
+	helper_collect(map, x, y - 1, map[x][y], coins); 
+	helper_collect(map, x - 1, y, map[x][y], coins);
+}
 
-	tmp_map = copy_map(map, size);
-	helper(tmp_map, x, y, 'Z');
-	if (!check_floodFill(tmp_map))
-		return (print_map(tmp_map), free_tab(tmp_map), printf("Error floodFill\n"), 0);
-	free_tab(tmp_map);
+int	floodFill(char **map, int x, int y, t_size_map *size, int total_collectibles)
+{
+	char	**tmp_map_collect;
+	char	**tmp_map_exit;
+	int		status_exit = 0;
+	int		coins = 0;
+
+	tmp_map_collect = copy_map(map, size);
+	tmp_map_exit = copy_map(map, size);
+	helper_exit(tmp_map_exit, x, y, 'Z', &status_exit);
+	helper_collect(tmp_map_collect, x, y, 'Z', &coins);
+	if (total_collectibles != coins || status_exit != 1)
+	{
+		printf("coins == %d | status_exit == %d\n", coins, status_exit);
+		return (free_tab(tmp_map_collect), free_tab(tmp_map_exit), printf("Error floodFill\n"), 0);
+	}
+	free_tab(tmp_map_collect);
+	free_tab(tmp_map_exit);
 	return (1);
 }
 

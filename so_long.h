@@ -64,8 +64,9 @@ int	check_if_rectangle(int len_line, int nu_column);
 
 /*------------- floodfill.c ---------------*/
 
-void	helper(char **map, int x, int y, char prev_val);
-int	floodFill(char **map, int x, int y, t_size_map *size_map);
+void	helper_collect(char **map, int x, int y, char prev_val, int *status_exit);
+void	helper_exit(char **map, int x, int y, char prev_val, int *coins);
+int	floodFill(char **map, int x, int y, t_size_map *size_map, int  total_collectibles);
 char	**copy_map(char **prev_map, t_size_map *size_map);
 int		check_floodFill(char **map);
 
