@@ -11,7 +11,10 @@ SRCS		= main.c \
 				check_map.c \
 				start_game.c \
 				move.c	\
+				init.c \
+				map.c \
 				ft_strcpy.c \
+				ft_strcmp.c \
 				get_next_line.c \
 				get_next_line_utils.c \
 

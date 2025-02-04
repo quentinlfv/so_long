@@ -1,24 +1,17 @@
 #include "so_long.h"
+#include "get_next_line.h"
 
-int	check_map(t_game *game)
+int	check_format(char *map)
 {
-	int	i;
-	int	j;
+	char	*format;
+	int		len_map_file;
 
-	i = 0;
-	while (game->map[i])
-	{
-		j = 0;
-		while (game->map[i][j])
-		{
-			if (!check_pos(game->map[i][j], i, j, &game))
-				return (0);
-			j++;
-		}
-		if (!check_if_rectangle(j, (game->size.column - 1)))
-			return (printf("j = %d | column = %d\n", j, game->size.column - 1), 0);
-		i++;
-	}
+	len_map_file = ft_strlen(map);
+	if (len_map_file < 5)
+		return (0);
+	format = map  + (len_map_file - 4);
+	if (ft_strcmp(format, ".ber"))
+		return (0);	
 	return (1);
 }
 
@@ -66,9 +59,4 @@ int	check_player(int x, int y, t_player *player)
 	return (1);
 }
 
-int	check_if_rectangle(int len_line, int nu_column)
-{
-	if (len_line != nu_column)
-		return (0);
-	return (1);
-}
+
