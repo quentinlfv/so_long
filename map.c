@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: quelefev <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/05 16:51:28 by quelefev          #+#    #+#             */
+/*   Updated: 2025/02/05 17:12:12 by quelefev         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "so_long.h"
 #include "get_next_line.h"
 
-char **get_map(int fd, t_size_map *size_map)
+char	**get_map(int fd, t_size_map *size_map)
 {
 	char	**map;
 	char	*line;
@@ -26,7 +37,7 @@ char **get_map(int fd, t_size_map *size_map)
 char	**add_new_line(char **map, char *line, int *size)
 {
 	char	**new_map;
-	int	i;
+	int		i;
 
 	i = 0;
 	new_map = malloc(sizeof(char *) * (*size + 2));
@@ -45,48 +56,4 @@ char	**add_new_line(char **map, char *line, int *size)
 	free(map);
 	(*size)++;
 	return (new_map);
-}
-
-int	check_map(t_game *game)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (game->map[i])
-	{
-		j = 0;
-		while (game->map[i][j])
-		{
-			if (!check_pos(game->map[i][j], i, j, &game))
-				return (0);
-			j++;
-		}
-		if (!check_if_rectangle(j, (game->size.column - 1)))
-			return (0);
-		i++;
-	}
-	if (game->nbr_item == 0)
-		return (0);
-	return (1);
-}
-
-int	check_if_rectangle(int len_line, int nu_column)
-{
-	if (len_line != nu_column)
-		return (0);
-	return (1);
-}
-
-void	free_tab(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i] != NULL)
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
 }

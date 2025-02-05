@@ -8,11 +8,14 @@ CFLAGS	= -Wall -Werror -Wextra
 
 SRCS		= main.c \
 				floodfill.c \
-				check_map.c \
+				check1.c \
+				check2.c \
 				start_game.c \
-				move.c	\
+				event.c \
+				moves.c	\
 				init.c \
 				map.c \
+				utils.c \
 				ft_strcpy.c \
 				ft_strcmp.c \
 				get_next_line.c \
