@@ -6,7 +6,7 @@
 /*   By: quelefev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 17:29:05 by quelefev          #+#    #+#             */
-/*   Updated: 2025/02/05 17:31:32 by quelefev         ###   ########.fr       */
+/*   Updated: 2025/02/06 13:29:14 by quelefev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef SO_LONG_H
@@ -55,7 +55,7 @@ typedef struct s_data
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	void	*textures[5];
+	void	*assets[5];
 	char	**map_addr;
 	t_game	*game_addr;
 }t_data;
@@ -112,6 +112,7 @@ void	move_down(t_data *data, char **map, t_player *player);
 
 void	free_tab(char **tab);
 void	put_img_to_window(t_data *data, void *asset, int x, int y);
+void	img_to_win(t_data *data, void **asset, int x, int y);
 void	ft_putstr(char *str);
 
 /*--------------- others -------------------*/
@@ -119,5 +120,6 @@ void	ft_putstr(char *str);
 int		ft_strcmp(const char *string1, const char *string2);
 char	*ft_strcpy(char *dest, char *src);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+void	ft_putnbr(int nb);
 
 #endif

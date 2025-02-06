@@ -6,7 +6,7 @@
 /*   By: quelefev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 16:52:11 by quelefev          #+#    #+#             */
-/*   Updated: 2025/02/05 17:21:26 by quelefev         ###   ########.fr       */
+/*   Updated: 2025/02/06 13:22:00 by quelefev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -18,15 +18,15 @@ int	assign_assets_to_img(t_data *data)
 
 	width = 128;
 	heigth = 128;
-	data->textures[0] = mlx_xpm_file_to_image(data->mlx_ptr, \
+	data->assets[0] = mlx_xpm_file_to_image(data->mlx_ptr, \
 		"assets/Bricks.xpm", &width, &heigth);
-	data->textures[1] = mlx_xpm_file_to_image(data->mlx_ptr, \
+	data->assets[1] = mlx_xpm_file_to_image(data->mlx_ptr, \
 		"assets/Grass.xpm", &width, &heigth);
-	data->textures[2] = mlx_xpm_file_to_image(data->mlx_ptr, \
+	data->assets[2] = mlx_xpm_file_to_image(data->mlx_ptr, \
 		"assets/Character.xpm", &width, &heigth);
-	data->textures[3] = mlx_xpm_file_to_image(data->mlx_ptr, \
+	data->assets[3] = mlx_xpm_file_to_image(data->mlx_ptr, \
 		"assets/Stairs.xpm", &width, &heigth);
-	data->textures[4] = mlx_xpm_file_to_image(data->mlx_ptr, \
+	data->assets[4] = mlx_xpm_file_to_image(data->mlx_ptr, \
 		"assets/Coin.xpm", &width, &heigth);
 	put_map_to_window(data);
 	return (0);
@@ -45,19 +45,19 @@ void	put_map_to_window(t_data *data)
 		{
 			if (data->map_addr[i][j] == '1')
 				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, \
-					data->textures[0], (j * SIZE), (i * SIZE));
+					data->assets[0], (j * SIZE), (i * SIZE));
 			if (data->map_addr[i][j] == '0')
 				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, \
-					data->textures[1], (j * SIZE), (i * SIZE));
+					data->assets[1], (j * SIZE), (i * SIZE));
 			if (data->map_addr[i][j] == 'P')
 				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, \
-					data->textures[2], (j * SIZE), (i * SIZE));
+					data->assets[2], (j * SIZE), (i * SIZE));
 			if (data->map_addr[i][j] == 'E')
 				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, \
-					data->textures[3], (j * SIZE), (i * SIZE));
+					data->assets[3], (j * SIZE), (i * SIZE));
 			if (data->map_addr[i][j] == 'C')
 				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, \
-					data->textures[4], (j * SIZE), (i * SIZE));
+					data->assets[4], (j * SIZE), (i * SIZE));
 			j++;
 		}
 		i++;

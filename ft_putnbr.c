@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: quelefev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/05 16:50:57 by quelefev          #+#    #+#             */
-/*   Updated: 2025/02/06 13:44:57 by quelefev         ###   ########.fr       */
+/*   Created: 2024/11/20 18:02:04 by quelefev          #+#    #+#             */
+/*   Updated: 2025/02/06 13:26:41 by quelefev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
-#include "get_next_line.h"
 
-int	main(int ac, char **av)
+void	ft_putnbr(int nb)
 {
-	int		fd;
-	t_game	game;
+	long	nbr;
 
-	if (ac != 2 || !check_format(av[1]))
-		return (0);
-	fd = open(av[1], O_RDONLY);
-	if (!fd)
-		return (0);
-	init_struct(&game);
-	game.map = get_map(fd, &game.size);
-	close(fd);
-	if (!check_map(&game) || !floodfill(&game, &game.size))
-		return (free_tab(game.map), 0);
-	start_game(&game);
-	free_tab(game.map);
-	return (0);
+	nbr = nb;
+	if (nbr < 0)
+	{
+		ft_putchar('-');
+		nbr = -nbr;
+	}
+	if (nbr >= 10)
+	{
+		ft_putnbr(nbr / 10);
+		ft_putnbr(nbr % 10);
+	}
+	else
+	{
+		ft_putchar(nbr + 48);
+	}
 }

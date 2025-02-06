@@ -18,6 +18,7 @@ SRCS		= main.c \
 				utils.c \
 				ft_strcpy.c \
 				ft_strcmp.c \
+				ft_putnbr.c \
 				get_next_line.c \
 				get_next_line_utils.c \
 
