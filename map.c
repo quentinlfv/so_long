@@ -6,7 +6,7 @@
 /*   By: quelefev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 16:51:28 by quelefev          #+#    #+#             */
-/*   Updated: 2025/02/05 17:12:12 by quelefev         ###   ########.fr       */
+/*   Updated: 2025/02/07 16:22:51 by quelefev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -37,6 +37,7 @@ char	**get_map(int fd, t_size_map *size_map)
 char	**add_new_line(char **map, char *line, int *size)
 {
 	char	**new_map;
+	int		len;
 	int		i;
 
 	i = 0;
@@ -48,10 +49,14 @@ char	**add_new_line(char **map, char *line, int *size)
 		new_map[i] = map[i];
 		i++;
 	}
+	if (line[ft_strlen(line)] == '\n')
+		len = ft_strlen(line) - 1;
+	else
+		len = ft_strlen(line);
 	new_map[i] = malloc(sizeof(char) * (ft_strlen(line)));
 	if (!new_map[i])
 		return (NULL);
-	ft_strlcpy(new_map[i], line, ft_strlen(line));
+	ft_strlcpy(new_map[i], line, len);
 	new_map[i + 1] = NULL;
 	free(map);
 	(*size)++;

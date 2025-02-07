@@ -6,7 +6,7 @@
 /*   By: quelefev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 17:29:05 by quelefev          #+#    #+#             */
-/*   Updated: 2025/02/06 13:29:14 by quelefev         ###   ########.fr       */
+/*   Updated: 2025/02/07 13:51:53 by quelefev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef SO_LONG_H
@@ -23,10 +23,10 @@
 
 # define SIZE 128
 # define ESCAPE 65307
-# define RIGTH 65363
-# define LEFT 65361
-# define UP 65362
-# define DOWN 65364
+# define RIGTH 100
+# define LEFT 97
+# define UP 119
+# define DOWN 115
 
 typedef struct s_player
 {
@@ -112,8 +112,9 @@ void	move_down(t_data *data, char **map, t_player *player);
 
 void	free_tab(char **tab);
 void	put_img_to_window(t_data *data, void *asset, int x, int y);
-void	img_to_win(t_data *data, void **asset, int x, int y);
+void	img_to_win(t_data *data, int index_asset, int x, int y);
 void	ft_putstr(char *str);
+void	ft_putchar(char c);
 
 /*--------------- others -------------------*/
 

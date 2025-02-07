@@ -6,7 +6,7 @@
 /*   By: quelefev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 16:46:35 by quelefev          #+#    #+#             */
-/*   Updated: 2025/02/05 16:46:38 by quelefev         ###   ########.fr       */
+/*   Updated: 2025/02/07 16:17:04 by quelefev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -27,7 +27,7 @@ int	check_map(t_game *game)
 			j++;
 		}
 		if (!check_if_rectangle(j, (game->size.column - 1)))
-			return (0);
+			return (printf("not rectangle\n"), 0);
 		i++;
 	}
 	if (game->nbr_item == 0)
@@ -37,6 +37,7 @@ int	check_map(t_game *game)
 
 int	check_if_rectangle(int len_line, int nu_column)
 {
+	printf("len_line = %d | nu_column = %d\n", len_line, nu_column);
 	if (len_line != nu_column)
 		return (0);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: quelefev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 16:52:11 by quelefev          #+#    #+#             */
-/*   Updated: 2025/02/06 13:22:00 by quelefev         ###   ########.fr       */
+/*   Updated: 2025/02/07 12:09:25 by quelefev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -44,20 +44,15 @@ void	put_map_to_window(t_data *data)
 		while (data->map_addr[i][j])
 		{
 			if (data->map_addr[i][j] == '1')
-				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, \
-					data->assets[0], (j * SIZE), (i * SIZE));
+				img_to_win(data, 0, j, i);
 			if (data->map_addr[i][j] == '0')
-				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, \
-					data->assets[1], (j * SIZE), (i * SIZE));
+				img_to_win(data, 1, j, i);
 			if (data->map_addr[i][j] == 'P')
-				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, \
-					data->assets[2], (j * SIZE), (i * SIZE));
+				img_to_win(data, 2, j, i);
 			if (data->map_addr[i][j] == 'E')
-				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, \
-					data->assets[3], (j * SIZE), (i * SIZE));
+				img_to_win(data, 3, j, i);
 			if (data->map_addr[i][j] == 'C')
-				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, \
-					data->assets[4], (j * SIZE), (i * SIZE));
+				img_to_win(data, 4, j, i);
 			j++;
 		}
 		i++;
