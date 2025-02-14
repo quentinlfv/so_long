@@ -6,7 +6,7 @@
 /*   By: quelefev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 16:50:16 by quelefev          #+#    #+#             */
-/*   Updated: 2025/02/05 17:05:08 by quelefev         ###   ########.fr       */
+/*   Updated: 2025/02/14 15:12:27 by quelefev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -22,7 +22,7 @@ char	**copy_map(char **prev_map, t_size_map *size)
 		return (NULL);
 	while (i < size->line)
 	{
-		new_map[i] = malloc(sizeof(char) * (size->column));
+		new_map[i] = malloc(sizeof(char) * (size->column + 1));
 		if (!new_map[i])
 			return (NULL);
 		ft_strcpy(new_map[i], prev_map[i]);
@@ -73,6 +73,6 @@ int	floodfill(t_game *game, t_size_map *size)
 	helper_exit(tmp_map, game->player.x, game->player.y, &status_exit);
 	free_tab(tmp_map);
 	if (game->nbr_item != collectibles || status_exit != 1)
-		return (ft_putstr("Error Floodfill\n"), 0);
+		return (ft_putstr("Error\nFloodfill\n"), 0);
 	return (1);
 }

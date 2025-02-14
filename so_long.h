@@ -6,7 +6,7 @@
 /*   By: quelefev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 17:29:05 by quelefev          #+#    #+#             */
-/*   Updated: 2025/02/07 13:51:53 by quelefev         ###   ########.fr       */
+/*   Updated: 2025/02/14 12:56:50 by quelefev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef SO_LONG_H
@@ -65,7 +65,9 @@ typedef struct s_data
 void	print_map(char **map);
 
 /*------------------- init.c------------------*/
-void	init_struct(t_game *game);
+
+void	init_game_struct(t_game *game);
+void	init_data_struct(t_data *data);
 
 /*-------------- map.c ----------------------*/
 
@@ -99,6 +101,7 @@ void	put_map_to_window(t_data *data);
 
 int		on_keypress(int keysym, t_data *data);
 int		on_destroy(t_data *data);
+void	destroy_imgs(t_data *data);
 
 /*------------- move.c -------------------*/
 

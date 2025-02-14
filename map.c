@@ -6,7 +6,7 @@
 /*   By: quelefev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 16:51:28 by quelefev          #+#    #+#             */
-/*   Updated: 2025/02/07 16:22:51 by quelefev         ###   ########.fr       */
+/*   Updated: 2025/02/14 15:01:05 by quelefev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -21,8 +21,14 @@ char	**get_map(int fd, t_size_map *size_map)
 	map = NULL;
 	size = 0;
 	line = get_next_line(fd);
+	if (!line)
+	{
+		ft_putstr("Error\n");
+		close(fd);
+		return (NULL);
+	}
 	map = add_new_line(map, line, &size);
-	size_map->column = ft_strlen(line);
+	size_map->column = ft_strlen(line) - 1;
 	while (line != NULL)
 	{
 		free(line);

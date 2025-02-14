@@ -6,7 +6,7 @@
 /*   By: quelefev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 16:52:11 by quelefev          #+#    #+#             */
-/*   Updated: 2025/02/07 12:09:25 by quelefev         ###   ########.fr       */
+/*   Updated: 2025/02/14 15:29:01 by quelefev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -16,20 +16,28 @@ int	assign_assets_to_img(t_data *data)
 	int		width;
 	int		heigth;
 
-	width = 128;
-	heigth = 128;
 	data->assets[0] = mlx_xpm_file_to_image(data->mlx_ptr, \
-		"assets/Bricks.xpm", &width, &heigth);
+			"assets/Bricks.xpm", &width, &heigth);
+	if (!data->assets[0])
+		return (0);
 	data->assets[1] = mlx_xpm_file_to_image(data->mlx_ptr, \
-		"assets/Grass.xpm", &width, &heigth);
+			"assets/Grass.xpm", &width, &heigth);
+	if (!data->assets[1])
+		return (0);
 	data->assets[2] = mlx_xpm_file_to_image(data->mlx_ptr, \
-		"assets/Character.xpm", &width, &heigth);
+			"assets/Character.xpm", &width, &heigth);
+	if (!data->assets[2])
+		return (0);
 	data->assets[3] = mlx_xpm_file_to_image(data->mlx_ptr, \
-		"assets/Stairs.xpm", &width, &heigth);
+			"assets/Stairs.xpm", &width, &heigth);
+	if (!data->assets[3])
+		return (0);
 	data->assets[4] = mlx_xpm_file_to_image(data->mlx_ptr, \
-		"assets/Coin.xpm", &width, &heigth);
+			"assets/Coin.xpm", &width, &heigth);
+	if (!data->assets[4])
+		return (0);
 	put_map_to_window(data);
-	return (0);
+	return (1);
 }
 
 void	put_map_to_window(t_data *data)
@@ -63,6 +71,7 @@ void	start_game(t_game *game)
 {
 	t_data	data;
 
+	init_data_struct(&data);
 	data.map_addr = game->map;
 	data.mlx_ptr = mlx_init();
 	if (!data.mlx_ptr)
@@ -71,9 +80,10 @@ void	start_game(t_game *game)
 	if (!data.win_ptr)
 		return (free(data.mlx_ptr));
 	data.game_addr = game;
-	assign_assets_to_img(&data);
-	mlx_hook(data.win_ptr, KeyRelease, KeyReleaseMask, &on_keypress, &data);
+	if (!assign_assets_to_img(&data))
+		on_destroy(&data);
+	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, &on_keypress, &data);
 	mlx_hook(data.win_ptr, DestroyNotify, StructureNotifyMask, \
-		&on_destroy, &data);
+			&on_destroy, &data);
 	mlx_loop(data.mlx_ptr);
 }
